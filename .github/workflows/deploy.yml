@@ -38,3 +38,4 @@ jobs:
         run: |
           aws eks update-kubeconfig --name assignment-eks-cluster --region ap-south-1
           helm upgrade --install fastapi-release ./fastapi-chart
+          kubectl get svc
