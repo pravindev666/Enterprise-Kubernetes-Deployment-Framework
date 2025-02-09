@@ -37,4 +37,4 @@ jobs:
       - name: Deploy to EKS
         run: |
           aws eks update-kubeconfig --name assignment-eks-cluster --region ap-south-1
-          helm install fastapi-release ./fastapi-chart
+          helm upgrade --install fastapi-release ./fastapi-chart
