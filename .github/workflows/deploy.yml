@@ -14,14 +14,14 @@ jobs:
 
       - name: Login to Amazon ECR
         run: |
-          echo "${{ secrets.AWS_ECR_PASSWORD }}" | docker login --username AWS --password-stdin <aws-account-id>.dkr.ecr.us-east-1.amazonaws.com
+          echo "${{ secrets.AWS_ECR_PASSWORD }}" | docker login --username AWS --password-stdin 008971655298.dkr.ecr.ap-south-1.amazonaws.com
 
       - name: Build and Push Docker Image
         run: |
           docker build -t fastapi-app .
-          docker push <aws-account-id>.dkr.ecr.us-east-1.amazonaws.com/fastapi-app:latest
+          docker push 008971655298.dkr.ecr.ap-south-1.amazonaws.com/fastapi-app:latest
 
       - name: Deploy to EKS
         run: |
-          aws eks update-kubeconfig --name my-eks-cluster --region us-east-1
+          aws eks update-kubeconfig --name my-eks-cluster --region ap-south-1
           helm upgrade --install fastapi-release ./fastapi-chart
