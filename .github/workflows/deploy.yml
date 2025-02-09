@@ -18,6 +18,7 @@ jobs:
 
       - name: Build and Push Docker Image
         run: |
+          cd fastapi-app
           docker build -t fastapi-app .
           docker push 008971655298.dkr.ecr.ap-south-1.amazonaws.com/fastapi-app:latest
 
