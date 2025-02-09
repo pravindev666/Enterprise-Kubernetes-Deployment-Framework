@@ -1,4 +1,3 @@
-# assignment-eks-pravin
 # DevOps Engineer - Assignment
 
 ## Objective
