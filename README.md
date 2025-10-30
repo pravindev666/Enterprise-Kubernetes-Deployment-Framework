@@ -1,7 +1,9 @@
 # DevOps Engineer - Assignment
 
 ## Objective
-Your task is to build and deploy a containerized application on **AWS** using **EKS** (Elastic Kubernetes Service) with an integrated **CI/CD pipeline** that includes **cold build, code deployment, and automated updates**.
+To build and deploy a containerized application on **AWS** using **EKS** (Elastic Kubernetes Service) with an integrated **CI/CD pipeline** that includes **cold build, code deployment, and automated updates**.
+A production-grade, cloud-native microservices platform demonstrating modern DevOps practices and enterprise deployment patterns. This project showcases the complete lifecycle of containerized application deployment—from infrastructure provisioning to automated CI/CD pipelines—on AWS Elastic Kubernetes Service (EKS).
+Key Achievement: Zero-downtime deployments with automated rollback capabilities and comprehensive observability.
 
 ## Use Case
 Aivar is deploying a **microservices-based application** that needs to be **containerized, orchestrated, and automatically deployed** in **AWS EKS**. You will:
