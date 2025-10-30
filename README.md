@@ -13,7 +13,7 @@
 
 A production-grade, cloud-native microservices platform demonstrating modern DevOps practices and enterprise deployment patterns. This project showcases the complete lifecycle of containerized application deployment—from infrastructure provisioning to automated CI/CD pipelines—on AWS Elastic Kubernetes Service (EKS).
 
-Built for **Aivar's microservices architecture**, this platform provides a robust foundation for deploying, managing, and scaling containerized applications with zero-downtime deployments, automated rollback capabilities, and comprehensive observability.
+Built for ** Python microservices architecture**, this platform provides a robust foundation for deploying, managing, and scaling containerized applications with zero-downtime deployments, automated rollback capabilities, and comprehensive observability.
 
 ### **Key Achievements**
 -  **Zero-downtime deployments** with rolling update strategies
