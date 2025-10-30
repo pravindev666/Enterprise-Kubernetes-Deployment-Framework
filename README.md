@@ -27,62 +27,7 @@ Built for **Python microservices architecture**, this platform provides a robust
 
 ## 🏗️ Architecture
 
-```
-┌────────────────────────────────────────────────────────────────────┐
-│                      GitHub / GitLab Repository                     │
-│                   (Source Code + Infrastructure)                    │
-└────────────────────┬───────────────────────────────────────────────┘
-                     │ Push Event
-                     ▼
-┌────────────────────────────────────────────────────────────────────┐
-│                     CI/CD Pipeline (GitHub Actions)                 │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐          │
-│  │  Build   │→ │   Test   │→ │   Push   │→ │  Deploy  │          │
-│  │  (Cold)  │  │          │  │   ECR    │  │   EKS    │          │
-│  └──────────┘  └──────────┘  └──────────┘  └──────────┘          │
-└────────────────────┬───────────────────────────────────────────────┘
-                     │
-                     ▼
-┌────────────────────────────────────────────────────────────────────┐
-│                    Amazon ECR (Container Registry)                  │
-│              (Versioned images tagged with Git SHA)                 │
-└────────────────────┬───────────────────────────────────────────────┘
-                     │
-                     ▼
-┌────────────────────────────────────────────────────────────────────┐
-│                         AWS EKS Cluster                             │
-│  ┌────────────────────────────────────────────────────────────┐   │
-│  │                    Kubernetes Workloads                     │   │
-│  │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐    │   │
-│  │  │   FastAPI    │  │   FastAPI    │  │   FastAPI    │    │   │
-│  │  │   Pod #1     │  │   Pod #2     │  │   Pod #3     │    │   │
-│  │  └──────────────┘  └──────────────┘  └──────────────┘    │   │
-│  │          │                  │                 │            │   │
-│  │          └──────────────────┴─────────────────┘            │   │
-│  │                            │                                │   │
-│  │                    ┌───────▼────────┐                      │   │
-│  │                    │  Service (LB)  │                      │   │
-│  │                    └───────┬────────┘                      │   │
-│  └────────────────────────────┼─────────────────────────────┘   │
-│                                │                                   │
-│                    ┌───────────▼────────────┐                     │
-│                    │  AWS ALB Ingress       │                     │
-│                    │  Controller            │                     │
-│                    └───────────┬────────────┘                     │
-└────────────────────────────────┼──────────────────────────────────┘
-                                 │
-                    ┌────────────▼────────────┐
-                    │   Internet Gateway      │
-                    │   (Public Access)       │
-                    └─────────────────────────┘
-                                 │
-                    ┌────────────▼────────────┐
-                    │   Monitoring & Logs     │
-                    │  (CloudWatch, Grafana)  │
-                    └─────────────────────────┘
-```
 
----
 
 ## 💼 Business Value & Technical Impact
 
@@ -375,7 +320,7 @@ cloudnative-eks-platform/
 
 ---
 
-## 🛠️ Getting Started
+## Getting Started
 
 ### **Prerequisites**
 
@@ -570,18 +515,18 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      1. ✅ Checkout Code
-      2. ✅ Configure AWS Credentials
-      3. ✅ Login to Amazon ECR
-      4. ✅ Build Docker Image (cold build with cache)
-      5. ✅ Run Security Scan (Trivy)
-      6. ✅ Tag Image (Git SHA + latest)
-      7. ✅ Push to ECR
-      8. ✅ Update kubeconfig for EKS
-      9. ✅ Deploy with Helm (rolling update)
-      10. ✅ Wait for Rollout Completion
-      11. ✅ Run Smoke Tests
-      12. ✅ Send Slack Notification
+      1.  Checkout Code
+      2.  Configure AWS Credentials
+      3.  Login to Amazon ECR
+      4.  Build Docker Image (cold build with cache)
+      5.  Run Security Scan (Trivy)
+      6.  Tag Image (Git SHA + latest)
+      7.  Push to ECR
+      8.  Update kubeconfig for EKS
+      9.  Deploy with Helm (rolling update)
+      10. Wait for Rollout Completion
+      11. Run Smoke Tests
+      12. Send Slack Notification
 ```
 
 **Pipeline Duration**: ~8-12 minutes (depending on cold build cache)
@@ -627,7 +572,7 @@ metadata:
 
 ---
 
-## 📊 Monitoring & Observability Setup
+##  Monitoring & Observability Setup
 
 ### **CloudWatch Container Insights**
 
@@ -715,26 +660,26 @@ groups:
 
 ---
 
-## 🔐 Security Best Practices
+## Security Best Practices
 
 ### **1. IAM Security**
-- ✅ Separate IAM roles for EKS cluster, node groups, and pods
-- ✅ Principle of least privilege for all policies
-- ✅ No hardcoded credentials in code or configuration
-- ✅ Use IAM roles for service accounts (IRSA) for pod-level permissions
+-  Separate IAM roles for EKS cluster, node groups, and pods
+-  Principle of least privilege for all policies
+-  No hardcoded credentials in code or configuration
+-  Use IAM roles for service accounts (IRSA) for pod-level permissions
 
 ### **2. Network Security**
-- ✅ VPC with private subnets for worker nodes
-- ✅ Security groups restricting traffic between pods
-- ✅ Network policies for pod-to-pod communication
-- ✅ ALB with SSL/TLS termination (HTTPS only)
+-  VPC with private subnets for worker nodes
+-  Security groups restricting traffic between pods
+-  Network policies for pod-to-pod communication
+-  ALB with SSL/TLS termination (HTTPS only)
 
 ### **3. Container Security**
-- ✅ Non-root user in Docker containers
-- ✅ Minimal base images (Alpine, Distroless)
-- ✅ Automated vulnerability scanning (Trivy/Snyk)
-- ✅ Image signing and verification
-- ✅ No secrets in Docker images or environment variables
+-  Non-root user in Docker containers
+-  Minimal base images (Alpine, Distroless)
+-  Automated vulnerability scanning (Trivy/Snyk)
+-  Image signing and verification
+-  No secrets in Docker images or environment variables
 
 ### **4. Secrets Management**
 ```bash
@@ -828,9 +773,9 @@ spec:
 
 ---
 
-## 🚧 Advanced Features & Future Enhancements
+##  Advanced Features & Future Enhancements
 
-### **Implemented Features** ✅
+### **Implemented Features** 
 - [x] **Automated CI/CD Pipeline** with GitHub Actions
 - [x] **Infrastructure as Code** with Terraform
 - [x] **Container Registry** with Amazon ECR
@@ -901,7 +846,7 @@ spec:
 
 ---
 
-## 🐛 Challenges Overcome & Solutions
+##  Challenges Overcome & Solutions
 
 ### **Challenge 1: IAM Permission Denied Errors**
 **Problem**: EKS worker nodes couldn't pull container images from ECR  
