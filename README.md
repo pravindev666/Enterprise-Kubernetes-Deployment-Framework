@@ -24,9 +24,35 @@ Built for **Python microservices architecture**, this platform provides a robust
 -  **Version-controlled deployments** tied to Git commit hashes
 
 ---
-
 ## 🏗️ Architecture
-
+```mermaid
+flowchart TD
+    A[GitHub/GitLab Repository<br/>Source Code + Infrastructure] --> B[Push Event]
+    B --> C[CI/CD Pipeline<br/>GitHub Actions]
+    C --> D[Build Cold]
+    D --> E[Test]
+    E --> F[Push ECR]
+    F --> G[Deploy EKS]
+    G --> H[Amazon ECR<br/>Container Registry<br/>Versioned images tagged with Git SHA]
+    H --> I[AWS EKS Cluster]
+    I --> J[Kubernetes Workloads]
+    I --> K[Monitoring & Logs<br/>CloudWatch, Grafana]
+    J --> L[FastAPI Pod 1]
+    J --> M[FastAPI Pod 2]
+    J --> N[FastAPI Pod 3]
+    L --> O[Service LB]
+    M --> O
+    N --> O
+    O --> P[AWS ALB Ingress Controller]
+    P --> Q[Internet Gateway<br/>Public Access]
+    
+    style A fill:#ffe4b5
+    style C fill:#ffe4b5
+    style G fill:#ffe4b5
+    style I fill:#ffe4b5
+    style K fill:#b3d9ff
+    style Q fill:#90ee90
+```
 
 
 ## 💼 Business Value & Technical Impact
